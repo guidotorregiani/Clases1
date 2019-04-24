@@ -61,26 +61,68 @@ int empleados_alta(Empleado *arrayEmpleados,int len,char* msg)
 {
     int ret=-1;
     int lugarLibre;
-    if(empleados_lugarLibre(arrayEmpleados,len,&lugarLibre)==0)
+    if(arrayEmpleados != NULL && len >= 0)
     {
-        printf("%s",msg);
-        scanf("%s",arrayEmpleados[lugarLibre].nombres);
-        printf("%s",msg);
-        scanf("%s",arrayEmpleados[lugarLibre].apellido);
+        if(empleados_lugarLibre(arrayEmpleados,len,&lugarLibre)==0)
+        {
+            printf("%s",msg);
+            scanf("%s",arrayEmpleados[lugarLibre].nombres);
+            printf("%s",msg);
+            scanf("%s",arrayEmpleados[lugarLibre].apellido);
+            ret=0;
+            arrayEmpleados[lugarLibre].isEmpty=-1;
+        }
+    }
+    return ret;
+}
+int empleados_baja(Empleado *arrayEmpleados,int len)
+{
+    int ret=-1;
+    if(arrayEmpleados != NULL && len >= 0)
+    {
+        int posicionEmpleado;
+        if(utn_getNumber(&posicionEmpleado,"ingrese la posicion de empleado a ser dado de baja","error",0,len,2)!=0)
+        {
+            printf("el legajo debe ser numerico");
+        }
+        if(arrayEmpleados[posicionEmpleado].isEmpty==1)
+        {
+            printf("esa posicion esta vacia");
+        }
+        else
+        {
+            arrayEmpleados[posicionEmpleado].isEmpty==1;
+            ret=0;
+        }
+    }
+    return ret;
+}
+
+int empleados_modificar(Empleado *arrayEmpleados,int len)
+{
+    int ret=-1;
+    int posicionEmpleado;
+    if(utn_getNumber(&posicionEmpleado,"ingrese la posicion de empleado a ser dado de baja","error",0,len,2)!=0)
+    {
+        printf("el legajo debe ser numerico");
+    }
+    if(arrayEmpleados[posicionEmpleado].isEmpty==1)
+    {
+        printf("esa posicion esta vacia");
+    }
+    if(arrayEmpleados != NULL && len >= 0 && arrayEmpleados[posicionEmpleado].isEmpty==-1)
+    {
+        printf("ingrese el nombre");
+        scanf("%s",arrayEmpleados[posicionEmpleado].nombres);
+        printf("ingrese el apellido");
+        scanf("%s",arrayEmpleados[posicionEmpleado].apellido);
+        arrayEmpleados[posicionEmpleado].isEmpty=-1;
         ret=0;
     }
     return ret;
 }
 
-int empleados_baja(Empleado *arrayEmpleados,int len)
-{
-    return 0;
-}
 
-int empleados_modificar(Empleado *arrayEmpleados,int len)
-{
-    return 0;
-}
 
 int empleados_ordenarNombre(Empleado *arrayEmpleados,int len)
 {

@@ -56,18 +56,11 @@ int main()
     char nombres[LEN_LISTA][20];
     int i,posLibre,posAeliminar;
     char buffer[20];
-
     // Inicializo la lista de nombres
-    for(i=0; i<LEN_LISTA;i++)
-        nombres[i][0]='\0';
-    //_______________________________
 
     while(opcion!=5)
     {
-        utn_getNumber(&opcion,
-                      "1)ingresar\n2)listar\n4)eliminar\n5)Salir\n",
-                      "NO!",
-                      1,10,2);
+        utn_getNumber(&opcion,"1)ingresar\n2)listar\n4)eliminar\n5)Salir\n","NO!",1,10,2);
 
         switch(opcion)
         {
