@@ -96,7 +96,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     int returnAux = -1;
     Node* newNode;
     Node* bufferNodeRead;
-    if(this!=NULL && nodeIndex>=ll_len(this))
+    if(this!=NULL && nodeIndex<=ll_len(this) && nodeIndex>=0)
     {
         newNode=(Node*)malloc(sizeof(Node));
 
@@ -109,13 +109,21 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
             {
                 newNode->pNextNode=bufferNodeRead->pNextNode;
                 bufferNodeRead->pNextNode=newNode;
+
                 this->size++;
                 returnAux=0;
             }
         }
         else if(newNode!=NULL && nodeIndex==0)
         {
+            newNode->pElement=pElement;
 
+            bufferNodeRead=this->pFirstNode;
+            this->pFirstNode=newNode;
+            newNode->pNextNode=bufferNodeRead;
+
+            returnAux = 0;
+            this->size++;
         }
     }
     return returnAux;
